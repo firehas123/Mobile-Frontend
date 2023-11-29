@@ -4,25 +4,25 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [username, setUsername] = useState('');
+  const [userAgent, setUsername] = useState(''); // change variable name to 'userAgent'
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
   const handleLogin = async () => {
     try {
-        const response = await fetch('http://localhost:8080/login', {
+        const response = await fetch('http://localhost:8081/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ userAgent, password }), // change property name to 'userAgent'
         });
 
         const result = await response.json();
 
         if (response.ok) {
             // Authentication successful
-            setMessage(`Welcome, ${username}!`);
+            setMessage(`Welcome, ${userAgent}!`);
         } else {
             setMessage(`Error: ${result.message}`);
         }
@@ -36,7 +36,7 @@ function App() {
     <div>
       <div>
         <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" value={userAgent} onChange={(e) => setUsername(e.target.value)} />
       </div>
       <div>
         <label>Password:</label>
